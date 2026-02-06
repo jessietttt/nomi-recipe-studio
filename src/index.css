@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: #faf8f5;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f0e8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7d8471;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2d2d2d;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid #c4856a;
+  outline-offset: 2px;
+}
+
+/* Subtle texture overlay */
+.texture-overlay {
+  position: relative;
+}
+
+.texture-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Button base styles */
+.btn-primary {
+  @apply bg-stone-900 text-stone-50 px-6 py-3 font-medium tracking-wide;
+  @apply transition-all duration-200 ease-out;
+  @apply hover:bg-stone-800 hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply border border-stone-900 text-stone-900 px-6 py-3 font-medium tracking-wide;
+  @apply transition-all duration-200 ease-out;
+  @apply hover:bg-stone-900 hover:text-stone-50;
+}
+
+/* Card styles */
+.recipe-card {
+  @apply bg-white rounded-sm overflow-hidden;
+  @apply transition-all duration-300 ease-out;
+  @apply hover:shadow-xl hover:-translate-y-1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Status badge styles */
+.status-badge {
+  @apply inline-flex items-center px-3 py-1 text-xs font-medium tracking-wider uppercase;
+}
+
+.status-testing {
+  @apply bg-amber-100 text-amber-700;
+}
+
+.status-menu-ready {
+  @apply bg-green-100 text-green-700;
+}
+
+.status-inspiration {
+  @apply bg-orange-100 text-orange-700;
+}
+
+/* Form inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+  @apply w-full px-4 py-3 bg-white border border-stone-200;
+  @apply text-stone-900 placeholder-stone-400;
+  @apply transition-all duration-200;
+  @apply focus:border-orange-400 focus:ring-0 focus:outline-none;
+  @apply text-base; /* Prevents iOS zoom on focus */
+}
+
+/* Search input with icon */
+input.pl-10,
+input.pl-12 {
+  padding-left: 2.75rem !important;
+}
+
+textarea {
+  @apply resize-none;
+}
+
+/* Tag styles */
+.tag {
+  @apply inline-flex items-center px-2 py-1 text-xs;
+  @apply bg-stone-100 text-stone-600 rounded-sm;
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Prose styles for rich text content */
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.prose li {
+  margin: 0.25rem 0;
+}
+
+.prose p {
+  margin: 0.5rem 0;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+/* TipTap editor styles */
+.ProseMirror {
+  outline: none;
+  min-height: 150px;
+}
+
+.ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+}
+
+.ProseMirror li {
+  margin: 0.25rem 0;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Print styles */
+@media print {
+  .page-break-before {
+    page-break-before: always;
+  }
+  
+  .page-break-after {
+    page-break-after: always;
+  }
+  
+  .no-page-break {
+    page-break-inside: avoid;
+  }
+}
